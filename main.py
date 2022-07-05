@@ -5,8 +5,11 @@
 # *****************************************************************************
 
 # This function is to view the file from txt file.
+
+import datetime
 def view():
     print("x")
+
 
 # Ritika
 # This function is to add the name into existing txt file
