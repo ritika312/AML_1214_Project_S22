@@ -4,6 +4,8 @@
 
 # *****************************************************************************
 
+# To submit on 15 of july for the verification and validation
+
 # This function is to view the file from txt file.
 
 import datetime
