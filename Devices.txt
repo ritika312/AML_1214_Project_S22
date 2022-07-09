@@ -1,0 +1,7 @@
+ThinkSystem SN550
+ThinkSystem SN850
+PowerEdge R240
+PowerEdge T640
+HPE ProLiant DL385
+HPE ProLiant ML350
+IBM -x1290
