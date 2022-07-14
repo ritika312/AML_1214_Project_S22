@@ -9,80 +9,104 @@
 # importing libraries
 
 import os
-
+import linecache
 
 # This function is to view the file from txt file.
 
 
 def view():
-    f = list(open('Devices.txt', 'r'))
-    i = int(input("Select the option from the list (1,2,3,4 0r 5): "))
-    if i == 1:
-        print(f[0])
-    elif i == 2:
-        print(f[1])
-    elif i == 3:
-        print(f[2])
-    elif i == 4:
-        print(f[3])
-    elif i == 5:
-        print(f[4])
-    else:
-        print("Enter the valid number from set")
-        i = input("Select the option from the list (1,2,3,4 0r 5)")
-
+    line_no = int(input("Select the line number form the list(1,2,3,4,5..."))
+    line = linecache.getline(r"Devices.txt", line_no)
+    print(line)
 
 # Ritika
 # This function is to add the name into existing txt file
 def addition():
-    with open('Devices.txt', 'r+') as file:
-        with open('temp.txt', 'w') as output:
-            # iterate all ines from file
-            name = input("Enter new device name and code : ")
-            for line in file:
-                # if the insert device name contains in a file  then don't write it
-                if name not in line.strip('\n'):
-                    output.write(line)
-                else:
-                    print("The device is already exist!!!")
-            output.write(f'{name}\n')
+    try:
+        with open('Devices.txt', 'r+') as file:
+            with open('temp.txt', 'w') as output:
+                try:
+                    device_name = input("Enter new device name and code : ")
+                    # check if the input name is alphanumeric
+                    if device_name.isalnum():
+                        try:
+                            # iterate all lines from file
+                            for line in file:
+                                # if the insert device name contains in a file  then don't write it
+                                if device_name not in line.strip('\n'):
+                                    output.write(line)
+                                else:
+                                    print("The device is already exist!!!")
+                            output.write(f'{device_name}\n')
+                        except Exception as e:
+                            print("Error has occurred in for loop statement" + str(e))
+                    else:
+                        print("Invalid input. Please enter the name and code simultaneously")
+                except ValueError as e:
+                    print("Error has occurred" + str(e))
 
-    os.replace('temp.txt', 'Devices.txt')
+        os.replace('temp.txt', 'Devices.txt')
+    except FileExistsError as e:
+        print("Error has occurred while opening file" + str(e))
     print("Device has been added successfully!!!")
 
 
 # Hemanta and Rosy
 # This function is to delete the name from existing txt file
 def delete():
-    with open("Devices.txt", 'r') as file:
-        with open('temp.txt', 'w') as output:
-            # iterate all ines from file
-            code = input("Enter the device code: ")
-            for line in file:
-                # if the insert code contains in a line then don't write it
-                if code not in line.strip('\n'):
-                    output.write(line)
-
-    os.replace('temp.txt', 'Devices.txt')
+    try:
+        with open("Devices.txt", 'r') as file:
+            with open('temp.txt', 'w') as output:
+                # iterate all lines from file
+                try:
+                    code = input("Enter the device code: ")
+                    if code.isalnum():
+                        try:
+                            for line in file:
+                                # if the insert code contains in a line then don't write it
+                                if code not in line.strip('\n'):
+                                    output.write(line)
+                        except Exception as e:
+                            print("Error has occurred in for loop statement" + str(e))
+                    else:
+                        print("Invalid input. Please enter code again!!")
+                        code = input("Enter the device code: ")
+                except ValueError as e:
+                    print("Error has occurred" + str(e))
+        os.replace('temp.txt', 'Devices.txt')
+    except FileExistsError as e:
+        print("Error has occurred while opening file" + str(e))
     print("The Device has been remove from the file.")
 
 
 # padam and bikesh
 # This function is to update the file to existing txt file
 def update():
-    with open("Devices.txt", 'r') as file:
-        with open('temp.txt', 'w') as output:
-            # iterate all ines from file
-            code = input("Enter the device code: ")
-            newname = input("Enter the new name for the respective device code: ")
-            for line in file:
-                # if the insert code contains in a line then don't write it
-                if code in line.strip('\n'):
-                    output.write(f'{newname} {code}')
-                elif code not in line.strip('\n'):
-                    output.write(line)
+    try:
+        with open("Devices.txt", 'r') as file:
+            with open('temp.txt', 'w') as output:
+                try:
+                    code = input("Enter the device code: ")
+                    newname = input("Enter the new name for the respective device code: ")
+                    if code.isalnum() and newname.isalpha():
+                        try:
+                            for line in file:
+                                # if the insert code contains in a line then don't write it
+                                if code in line.strip('\n'):
+                                    output.write(f'{newname} {code}')
+                                elif code not in line.strip('\n'):
+                                    output.write(line)
+                        except Exception as e:
+                            print("Error has occurred in for loop statement" + str(e))
+                    else:
+                        print("Invalid input. Please enter the valid code and new name!!!")
 
-    os.replace('temp.txt', 'Devices.txt')
+                except ValueError as e:
+                    print("Error has occurred" + str(e))
+
+        os.replace('temp.txt', 'Devices.txt')
+    except FileExistsError as e:
+        print("Error has occurred while opening file" + str(e))
     print("The device name has been updated!!")
 
 
@@ -93,10 +117,10 @@ def exit():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # view()
+    view()
     # addition()
 
-    delete()
+    # delete()
 
     # update()
     exit()
