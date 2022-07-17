@@ -1,0 +1,21 @@
+def main():
+    print("Welcome to the Device Management System\n")
+    print("1.View all devices")
+    print("2.Add a device")
+    print("3.Delete a device")
+    print("4.Update a device")
+    print("5.Exit the program")
+    choice=int(input("Select one option from the list(1,2,3,4, or 5):"))
+    if(choice==1):
+        view()
+    elif(choice==2):
+        addition()
+    elif(choice==3):
+        delete()
+    elif(choice==4):
+        update()
+    elif(choice==5):
+        quit()
+    else:
+        print("Invalid choice")
+main()
